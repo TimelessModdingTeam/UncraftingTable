@@ -1,5 +1,5 @@
 {
-    "parent": "block/uncrafting_table",
+    "parent": "uncraftingtable:block/uncrafting_table",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

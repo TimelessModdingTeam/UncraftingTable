@@ -3,7 +3,7 @@
     {
         "normal": 
         [
-            { "model": "uncrafting_table" }
+            { "model": "uncraftingtable:uncrafting_table" }
         ]
     }
 }
