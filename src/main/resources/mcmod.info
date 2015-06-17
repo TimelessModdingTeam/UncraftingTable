@@ -1,0 +1,10 @@
+[
+    {
+        "modid": "uncraftingtable",
+        "name": "UncraftingTable",
+        "version": "${version}",
+        "authorList": ["TimelessModdingTeam"],
+        "dependencies": [],
+        "description": "Uncraft your items and get the raw materials back!"
+    }
+]
