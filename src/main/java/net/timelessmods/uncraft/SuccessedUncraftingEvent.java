@@ -4,13 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-/**
- * 
- * @author jglrxavpok
- *
- */
-public class SuccessedUncraftingEvent extends Event
-{
+public class SuccessedUncraftingEvent extends Event {
 
 	/**
 	 * Uncrafted item
@@ -33,8 +27,7 @@ public class SuccessedUncraftingEvent extends Event
 	 */
 	private long	when;
 
-	public SuccessedUncraftingEvent(ItemStack stack, ItemStack[] output, int required, EntityPlayer player)
-	{
+	public SuccessedUncraftingEvent(ItemStack stack, ItemStack[] output, int required, EntityPlayer player) {
 		uncrafted = stack;
 		out = output;
 		nbr = required;
@@ -45,16 +38,14 @@ public class SuccessedUncraftingEvent extends Event
 	/**
 	 * When the event was fired (more like created, actually)
 	 */
-	public long getWhen()
-	{
+	public long getWhen() {
 		return when;
 	}
 	
 	/**
 	 * The player uncrafting the item
 	 */
-	public EntityPlayer getPlayer()
-	{
+	public EntityPlayer getPlayer() {
 		return p;
 	}
 	
@@ -62,29 +53,25 @@ public class SuccessedUncraftingEvent extends Event
 	 * The number of required items in order to do the uncrafting
 	 * @return
 	 */
-	public int getRequiredNumber()
-	{
+	public int getRequiredNumber() {
 		return nbr;
 	}
 	
-	public boolean isCancelable()
-	{
+	public boolean isCancelable() {
 		return true;
 	}
 	
 	/**
 	 * The uncrafted item 
 	 */
-	public ItemStack getUncrafted()
-	{
+	public ItemStack getUncrafted() {
 		return uncrafted;
 	}
 	
 	/**
 	 * The output of the uncrafting
 	 */
-	public ItemStack[] getOutput()
-	{
+	public ItemStack[] getOutput() {
 		return out;
 	}
 }

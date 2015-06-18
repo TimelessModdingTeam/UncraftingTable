@@ -1,42 +1,21 @@
 package net.timelessmods.uncraft;
 
-import net.minecraft.client.resources.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
 import net.minecraft.world.*;
 
-/**
- * 
- * @author jglrxavpok
- *
- */
-public class ContainerUncraftingTable extends Container
-{
-
-    public static enum State
-    {
-        ERROR, READY
-    }
+public class ContainerUncraftingTable extends Container {
 
     public InventoryCrafting      uncraftIn   = new InventoryCrafting(this, 1, 1);
     public InventoryUncraftResult uncraftOut  = new InventoryUncraftResult();
-    public InventoryCrafting      calculInput = new InventoryCrafting(this, 1, 1);
     private World                 worldObj;
     public InventoryPlayer        playerInv;
-    public String                 result      = I18n.format("uncrafting.result.ready");
-    public State                  type        = State.READY;
     public int                    x           = 0;
     public int                    y           = 0;
     public int                    z           = 0;
-    private int                   minLvl;
-    private int                   maxLvl;
-    private ItemStack             toReturn;
 
-    public ContainerUncraftingTable(InventoryPlayer par1PlayerInventory, World world, int x, int y, int z)
-    {
-        this.minLvl = minLvl;
-        this.maxLvl = maxLvl;
+    public ContainerUncraftingTable(InventoryPlayer par1PlayerInventory, World world, int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -44,25 +23,20 @@ public class ContainerUncraftingTable extends Container
         int l;
         int i1;
         int i2;
-        for(l = 0; l < 3; ++l)
-        {
-            for(i1 = 0; i1 < 3; ++i1)
-            {
+        for(l = 0; l < 3; ++l) {
+            for(i1 = 0; i1 < 3; ++i1) {
                 this.addSlotToContainer(new Slot(this.uncraftOut, i1 + l * 3, 112 + i1 * 18, 17 + l * 18));
             }
         }
-        this.addSlotToContainer(new Slot(this.uncraftIn, 0, 30 + 15, 35));
-        this.addSlotToContainer(new Slot(this.calculInput, 0, 15, 35));
 
-        for(l = 0; l < 3; ++l)
-        {
-            for(i1 = 0; i1 < 9; ++i1)
-            {
+        this.addSlotToContainer(new Slot(this.uncraftIn, 0, 30, 35));
+
+        for(l = 0; l < 3; ++l) {
+            for(i1 = 0; i1 < 9; ++i1) {
                 this.addSlotToContainer(new Slot(par1PlayerInventory, i1 + l * 9 + 9, 8 + i1 * 18, 84 + l * 18));
             }
         }
-        for(l = 0; l < 9; ++l)
-        {
+        for(l = 0; l < 9; ++l) {
             this.addSlotToContainer(new Slot(par1PlayerInventory, l, 8 + l * 18, 142));
         }
         playerInv = par1PlayerInventory;
@@ -73,8 +47,7 @@ public class ContainerUncraftingTable extends Container
      * If possible, tries to do the uncrafting and fires a SuccessedUncraftingEvent if managed to do it.
      */
     @SuppressWarnings("rawtypes")
-    public void onCraftMatrixChanged(IInventory inventory)
-    {
+    public void onCraftMatrixChanged(IInventory inventory) {
 
         // TODO: REWRITE EVERYTHING
      /*   toReturn = null;
@@ -376,17 +349,11 @@ public class ContainerUncraftingTable extends Container
         }*/
     }
 
-    public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer player)
-    {
+    public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer player) {
         ItemStack r = super.slotClick(par1, par2, par3, player);
-        if(inventorySlots.size() > par1 && par1 >= 0)
-        {
-            if(inventorySlots.get(par1) != null)
-            {
-                if((((Slot) inventorySlots.get(par1)).inventory == calculInput || ((Slot) inventorySlots.get(par1)).inventory == playerInv))
-                    this.onCraftMatrixChanged(calculInput);
-                else if(((Slot) inventorySlots.get(par1)).inventory == uncraftIn)
-                {
+        if(inventorySlots.size() > par1 && par1 >= 0) {
+            if(inventorySlots.get(par1) != null) {
+                if(((Slot) inventorySlots.get(par1)).inventory == uncraftIn) {
                     this.onCraftMatrixChanged(uncraftIn);
                 }
             }
@@ -397,120 +364,50 @@ public class ContainerUncraftingTable extends Container
     /**
      * Callback for when the crafting gui is closed.
      */
-    public void onContainerClosed(EntityPlayer par1EntityPlayer)
-    {
-        if(playerInv.getItemStack() != null)
-        {
+    public void onContainerClosed(EntityPlayer par1EntityPlayer) {
+        if(playerInv.getItemStack() != null) {
             par1EntityPlayer.entityDropItem(playerInv.getItemStack(), 0.5f);
         }
-        if(!this.worldObj.isRemote)
-        {
+        if(!this.worldObj.isRemote) {
             ItemStack itemstack = this.uncraftIn.getStackInSlotOnClosing(0);
-            if(itemstack != null)
-            {
+            if(itemstack != null) {
                 par1EntityPlayer.entityDropItem(itemstack, 0.5f);
             }
 
-            itemstack = this.calculInput.getStackInSlotOnClosing(0);
-            if(itemstack != null)
-            {
-                par1EntityPlayer.entityDropItem(itemstack, 0.5f);
-            }
-            for(int i = 0; i < uncraftOut.getSizeInventory(); i++ )
-            {
+            for(int i = 0; i < uncraftOut.getSizeInventory(); i++ ) {
                 itemstack = this.uncraftOut.getStackInSlotOnClosing(i);
 
-                if(itemstack != null)
-                {
+                if(itemstack != null) {
                     par1EntityPlayer.entityDropItem(itemstack, 0.5f);
                 }
             }
         }
     }
 
-    public boolean canInteractWith(EntityPlayer player)
-    {
+    public boolean canInteractWith(EntityPlayer player) {
         return true;
     }
 
     /**
      * Called when a player shift-clicks on a slot.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
-    {
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.inventorySlots.get(par2);
         if(slot != null && slot.getHasStack())
-            if(slot.inventory.equals(calculInput))
-            {
-                ItemStack itemstack1 = slot.getStack();
-                slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
-                if(!playerInv.addItemStackToInventory(itemstack1))
-                {
-                    return null;
-                }
-                slot.putStack(null);
-            }
-            else if(slot.inventory.equals(uncraftIn))
-            {
-                if(slot.getHasStack())
-                {
-                    if(!playerInv.addItemStackToInventory(slot.getStack()))
-                    {
+            if(slot.inventory.equals(uncraftIn)) {
+                if(slot.getHasStack()) {
+                    if(!playerInv.addItemStackToInventory(slot.getStack())) {
                         return null;
                     }
                     slot.putStack(null);
                     slot.onSlotChanged();
                 }
-            }
-            else if(slot.inventory.equals(playerInv))
-            {
-                Slot calcInput = null;
-                Slot uncraftSlot = null;
-                for(Object s : inventorySlots)
-                {
-                    Slot s1 = (Slot) s;
-                    if(s1.inventory.equals(calculInput))
-                    {
-                        calcInput = s1;
-                    }
-                    else if(s1.inventory.equals(uncraftIn))
-                    {
-                        uncraftSlot = s1;
-                    }
-                }
-                if(calcInput != null)
-                {
-                    if(calcInput.getStack() == null)
-                    {
-                        calcInput.putStack(slot.getStack());
-                        calcInput.onSlotChanged();
-                        slot.putStack(null);
-                    }
-                    else
-                    {
-                        if(slot.getStack() != null)
-                        {
-                            ItemStack i = slot.getStack();
-                            slot.onPickupFromSlot(par1EntityPlayer, slot.getStack());
-                            slot.putStack(calcInput.getStack().copy());
-                            calcInput.putStack(i.copy());
-                            this.onCraftMatrixChanged(calculInput);
-                            calcInput.onSlotChanged();
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                    }
-                }
-            }
-            else if(slot.inventory.equals(uncraftOut))
-            {
-                if(slot.getHasStack())
-                {
-                    if(!playerInv.addItemStackToInventory(slot.getStack()))
-                    {
+            } else if(slot.inventory.equals(playerInv)) {
+                // TODO: Shift-click in player inv
+            } else if(slot.inventory.equals(uncraftOut)) {
+                if(slot.getHasStack()) {
+                    if(!playerInv.addItemStackToInventory(slot.getStack())) {
                         return null;
                     }
                     slot.putStack(null);
@@ -520,13 +417,7 @@ public class ContainerUncraftingTable extends Container
         return null;
     }
 
-    public boolean func_94530_a(ItemStack par1ItemStack, Slot par2Slot)
-    {
-        return !par2Slot.inventory.equals(uncraftOut);
-    }
-
-    public Slot getSlot(int par1)
-    {
+    public Slot getSlot(int par1) {
         if(par1 >= this.inventorySlots.size())
             par1 = this.inventorySlots.size() - 1;
         return super.getSlot(par1);

@@ -11,21 +11,21 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import net.timelessmods.uncraft.common.CommonProxy;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = UncraftingTable.MODID, name = "UncraftingTable", version = UncraftingTable.VERSION)
 /**
  * Principal class of the mod. Used to handle crafting of the table & some of the new achievements.
- * @author jglrxavpok
  */
-public class UncraftingTable
-{
+public class UncraftingTable {
 
     public static final String  MODID      = "uncraftingtable";
     public static final String  VERSION    = "${version}";
@@ -42,47 +42,40 @@ public class UncraftingTable
     private Logger              logger;
     private Configuration       config;
 
-    public Logger getLogger()
-    {
+    @SidedProxy(clientSide = "net.timelessmods.uncraft.client.ClientProxy", serverSide = "net.timelessmods.uncraft.common.CommonProxy")
+    private CommonProxy proxy;
+
+    public Logger getLogger() {
         return logger;
     }
 
     @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(ItemBlock.getItemFromBlock(uncraftingTable), 0, new ModelResourceLocation(UncraftingTable.MODID + ":" + "uncrafting_table", "inventory"));
-
+    public void postInit(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
         DefaultsRecipeHandlers.load();
 
+        proxy.postInit();
         logger.info("Uncrafting Table has been correctly initialized!");
     }
 
     @SubscribeEvent
-    public void onUncrafting(UncraftingEvent event)
-    {
+    public void onUncrafting(UncraftingEvent event) {
     }
 
     @SubscribeEvent
-    public void onSuccessedUncrafting(SuccessedUncraftingEvent event)
-    {
+    public void onSuccessedUncrafting(SuccessedUncraftingEvent event) {
     }
 
-    public void saveProperties()
-    {
-        try
-        {
+    public void saveProperties() {
+        try {
             config.save();
-        }
-        catch(Exception e)
-        {
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
 
         config = new Configuration(event.getSuggestedConfigurationFile());
@@ -93,6 +86,7 @@ public class UncraftingTable
         uncraftingTable = new BlockUncraftingTable();
         GameRegistry.registerBlock(uncraftingTable, "uncrafting_table");
         GameRegistry.addShapedRecipe(new ItemStack(uncraftingTable), "SSS", "SXS", "SSS", 'X', Blocks.crafting_table, 'S', Blocks.cobblestone);
+        proxy.preInit();
     }
 
 }

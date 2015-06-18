@@ -6,11 +6,8 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 
 /**
  * This event is used to change the output/number of required items or even cancel an "uncrafting recipe".
- * @author jglrxavpok
- *
  */
-public class UncraftingEvent extends Event
-{
+public class UncraftingEvent extends Event {
 
 	/**
 	 * Uncrafted item
@@ -44,8 +41,7 @@ public class UncraftingEvent extends Event
 	 * @param required : The number of items required in order to do this uncrafting.
 	 * @param player : The player uncrafting the item.
 	 */
-	public UncraftingEvent(ItemStack uncrafted, ItemStack[] output, int required, EntityPlayer player)
-	{
+	public UncraftingEvent(ItemStack uncrafted, ItemStack[] output, int required, EntityPlayer player) {
 		item = uncrafted;
 		when = System.currentTimeMillis();
 		this.required = required;
@@ -56,16 +52,14 @@ public class UncraftingEvent extends Event
 	/**
 	 * Returns the output of the recipe. May be null if the item can't be uncrafted
 	 */
-	public ItemStack[] getOutput()
-	{
+	public ItemStack[] getOutput() {
 		return out;
 	}
 	
 	/**
 	 * Return the player uncrafting the item.
 	 */
-	public EntityPlayer getPlayer()
-	{
+	public EntityPlayer getPlayer() {
 		return p;
 	}
 	
@@ -73,45 +67,39 @@ public class UncraftingEvent extends Event
 	 * Change the output of the uncrafting.
 	 * @param out : May be null in order to cancel the event. <code>setCanceled(true);</code> is better in this case.
 	 */
-	public void setOutput(ItemStack[] out)
-	{
+	public void setOutput(ItemStack[] out) {
 		this.out = out;
 	}
 
 	/**
 	 * Returns hen the event was fired (actually, it's created)
 	 */
-	public long getWhen()
-	{
+	public long getWhen() {
 		return when;
 	}
 	
 	/**
 	 * Returns the uncrafted stack
 	 */
-	public ItemStack getUncraftedStack()
-	{
+	public ItemStack getUncraftedStack() {
 		return item;
 	}
 	
-	public boolean isCancelable()
-	{
+	public boolean isCancelable() {
 		return true;
 	}
 
 	/**
 	 * Returns the required amount of items in order to do the uncrafting.
 	 */
-	public int getRequiredNumber()
-	{
+	public int getRequiredNumber() {
 		return required;
 	}
 
 	/**
 	 * Set the required amount of items in order to do this uncrafting.
 	 */
-	public void setRequiredNumber(int required)
-	{
+	public void setRequiredNumber(int required) {
 		this.required = required;
 	}
 }

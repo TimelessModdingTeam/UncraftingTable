@@ -5,20 +5,15 @@ import net.minecraft.item.crafting.IRecipe;
 
 /**
  * Recipe Handlers return the "crafting grid" depending on a crafting recipe.
- * @author jglrxavpok
- *
  */
-public abstract class RecipeHandler
-{
+public abstract class RecipeHandler {
 	private Class<? extends IRecipe>	recipeType;
 
-	public RecipeHandler(Class<? extends IRecipe> recipe)
-	{
+	public RecipeHandler(Class<? extends IRecipe> recipe) {
 		this.recipeType = recipe;
 	}
 	
-	public Class<? extends IRecipe> getType()
-	{
+	public Class<? extends IRecipe> getType() {
 		return recipeType;
 	}
 	
