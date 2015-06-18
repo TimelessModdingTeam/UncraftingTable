@@ -43,7 +43,7 @@ public class UncraftingTable {
     private Configuration       config;
 
     @SidedProxy(clientSide = "net.timelessmods.uncraft.client.ClientProxy", serverSide = "net.timelessmods.uncraft.common.CommonProxy")
-    private CommonProxy proxy;
+    private static CommonProxy proxy;
 
     public Logger getLogger() {
         return logger;
@@ -64,14 +64,6 @@ public class UncraftingTable {
 
     @SubscribeEvent
     public void onSuccessedUncrafting(SuccessedUncraftingEvent event) {
-    }
-
-    public void saveProperties() {
-        try {
-            config.save();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @EventHandler
