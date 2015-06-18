@@ -1,4 +1,4 @@
-package net.timelessmods.uncraft;
+package net.timelessmods.uncraft.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

@@ -1,4 +1,4 @@
-package net.timelessmods.uncraft;
+package net.timelessmods.uncraft.client;
 
 import net.minecraft.client.gui.inventory.*;
 import net.minecraft.client.resources.*;
@@ -6,6 +6,8 @@ import net.minecraft.entity.player.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 
+import net.timelessmods.uncraft.common.ContainerUncraftingTable;
+import net.timelessmods.uncraft.common.UncraftingTable;
 import org.lwjgl.opengl.*;
 
 /**

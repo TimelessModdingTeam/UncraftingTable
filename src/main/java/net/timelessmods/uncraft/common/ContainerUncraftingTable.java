@@ -1,9 +1,10 @@
-package net.timelessmods.uncraft;
+package net.timelessmods.uncraft.common;
 
 import net.minecraft.entity.player.*;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
 import net.minecraft.world.*;
+import net.timelessmods.uncraft.common.api.InventoryUncraftResult;
 
 public class ContainerUncraftingTable extends Container {
 

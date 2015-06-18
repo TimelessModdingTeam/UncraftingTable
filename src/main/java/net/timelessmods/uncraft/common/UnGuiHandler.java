@@ -1,9 +1,10 @@
-package net.timelessmods.uncraft;
+package net.timelessmods.uncraft.common;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.timelessmods.uncraft.client.GuiUncraftingTable;
 
 public class UnGuiHandler implements IGuiHandler {
 

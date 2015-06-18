@@ -1,4 +1,4 @@
-package net.timelessmods.uncraft;
+package net.timelessmods.uncraft.common.api;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;

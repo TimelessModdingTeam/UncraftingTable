@@ -1,4 +1,4 @@
-package net.timelessmods.uncraft;
+package net.timelessmods.uncraft.common.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.timelessmods.uncraft.common.UncraftingTable;
 
 /**
  * Main part of the Uncrafting Table. The manager is used to parse the existing recipes and find the correct one depending on the given stack.

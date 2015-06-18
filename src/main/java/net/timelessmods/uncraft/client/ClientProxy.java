@@ -3,7 +3,7 @@ package net.timelessmods.uncraft.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.ItemBlock;
-import net.timelessmods.uncraft.UncraftingTable;
+import net.timelessmods.uncraft.common.UncraftingTable;
 import net.timelessmods.uncraft.common.CommonProxy;
 
 public class ClientProxy extends CommonProxy {

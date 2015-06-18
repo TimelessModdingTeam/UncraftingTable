@@ -1,4 +1,4 @@
-package net.timelessmods.uncraft;
+package net.timelessmods.uncraft.common.api;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

@@ -1,10 +1,7 @@
-package net.timelessmods.uncraft;
+package net.timelessmods.uncraft.common;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -18,7 +15,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import net.timelessmods.uncraft.common.CommonProxy;
+import net.timelessmods.uncraft.common.api.DefaultsRecipeHandlers;
+import net.timelessmods.uncraft.common.api.SuccessedUncraftingEvent;
+import net.timelessmods.uncraft.common.api.UncraftingEvent;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = UncraftingTable.MODID, name = "UncraftingTable", version = UncraftingTable.VERSION)
